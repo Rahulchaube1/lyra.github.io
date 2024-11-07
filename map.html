@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyra Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        .search-bar {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 60%;
+        }
+        .voice-btn {
+            position: absolute;
+            top: 70px;
+            left: 10px;
+            z-index: 999;
+            background: #ff7a18;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-bar">
+        <input type="text" id="location-search" placeholder="Search for a location" style="width: 80%; padding: 8px; border: 2px solid #ff7a18; border-radius: 5px;">
+        <button id="search-btn" style="padding: 8px; background-color: #ff7a18; color: white; border: none; border-radius: 5px;">Search</button>
+    </div>
+    <button class="voice-btn" id="voice-search-map">🎤</button>
+    
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([51.505, -0.09], 13); // Default location (London)
+
+        // Set default map layer (OpenStreetMap)
+        const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add Esri World Imagery for satellite view
+        const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; <a href="https://www.esri.com">Esri</a>'
+        });
+
+        // Add Terrain view
+        const terrainLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://opentopomap.org/">OpenTopoMap</a> contributors'
+        });
+
+        // Map control for switching layers
+        const baseLayers = {
+            "OpenStreetMap": osmLayer,
+            "Satellite": satelliteLayer,
+            "Terrain": terrainLayer
+        };
+        
+        L.control.layers(baseLayers).addTo(map);
+
+        // Location search functionality
+        const geocoder = L.Control.Geocoder.nominatim();
+
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const query = document.getElementById('location-search').value;
+            if (query) {
+                geocoder.geocode(query, function(results) {
+                    const result = results[0];
+                    if (result) {
+                        map.setView(result.center, 13); // Set the map view to the location found
+                        L.marker(result.center).addTo(map).bindPopup(result.name).openPopup();
+                    }
+                });
+            }
+        });
+
+        // Voice Search functionality
+        document.getElementById('voice-search-map').addEventListener('click', function() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+            recognition.onresult = function(event) {
+                const voiceQuery = event.results[0][0].transcript;
+                document.getElementById('location-search').value = voiceQuery;
+                document.getElementById('search-btn').click(); // Trigger search with voice input
+            };
+        });
+    </script>
+</body>
+</html>

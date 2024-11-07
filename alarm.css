@@ -1,0 +1,228 @@
+/* General Reset and Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background & Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to top left, #ff7e5f, #feb47b); /* Gradient background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animation for page load */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Main Alarm Container */
+.alarm-container {
+    width: 90%;
+    max-width: 800px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header-logo {
+    width: 50px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    animation: logoBounce 1.5s infinite alternate;
+}
+
+@keyframes logoBounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-top: 20px;
+    letter-spacing: 3px;
+    color: #ffdb58;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #fcd34d;
+    border: none;
+    font-size: 1rem;
+    color: #333;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffdb58;
+}
+
+/* Clock Style */
+.clock {
+    font-size: 3.5rem;
+    margin-top: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
+    color: #ffdb58;
+    animation: clockPulse 1.5s infinite alternate;
+}
+
+@keyframes clockPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* General Section */
+.section {
+    width: 100%;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    color: #ffdb58;
+    font-size: 1.8rem;
+}
+
+/* Input Styling */
+input[type="time"], input[type="number"] {
+    padding: 12px;
+    font-size: 1.2rem;
+    width: 80%;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease;
+}
+
+input[type="time"]:focus, input[type="number"]:focus {
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+
+/* Action Button */
+.action-btn {
+    background-color: #fcd34d;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #ffdb58;
+    transform: scale(1.05);
+}
+
+/* Stopwatch Display */
+#stopwatch-display {
+    font-size: 2rem;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* History Section */
+.history-section {
+    margin-top: 30px;
+    width: 100%;
+}
+
+#history-list {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    max-height: 250px;
+    overflow-y: auto;
+    animation: fadeInHistory 1s ease-out;
+}
+
+@keyframes fadeInHistory {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.history-item {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+}
+
+.history-item:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.03);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .alarm-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+
+    #stopwatch-display {
+        font-size: 1.5rem;
+    }
+
+    input[type="time"], input[type="number"] {
+        width: 100%;
+    }
+}

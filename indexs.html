@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lyra - AI Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="lyra.png" alt="Lyra Logo" id="logo-img">
+        </div>
+        <ul>
+            <li><a href="#">Schedule</a></li>
+            <li><a href="#">Problem Solving</a></li>
+            <li><a href="alarm.html" target="_blank">Alarm</a></li>
+            <li><a href="map.html" target="_blank">Map</a></li>
+        </ul>
+        <button id="toggle-dark-mode">&#x1F31C;</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="chat-box">
+            <h2>Ask Lyra Anything</h2>
+
+            <!-- Chat Log -->
+            <div class="chat-log" id="chat-log"></div>
+
+            <!-- User Input -->
+            <input type="text" id="user-input" class="chat-input" placeholder="Ask me something..." />
+            <button id="send-question">Ask</button>
+
+            <!-- File Upload -->
+            <input type="file" id="file-upload" />
+            <button id="attach-file">Attach File</button>
+
+            <!-- Camera Input -->
+            <button id="camera-btn">Use Camera</button>
+
+            <!-- Voice Search -->
+            <button id="voice-search">🎤</button>
+        </div>
+
+        <!-- Response Container -->
+        <div class="response" id="response-container">
+            <p id="response-text"></p>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

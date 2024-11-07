@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyra Alarm & Timer</title>
+    <link rel="stylesheet" href="alarm.css">
+</head>
+<body>
+    <div class="alarm-container">
+        <div class="header">
+            <img src="lyra.png" alt="Lyra Logo" class="header-logo">
+            <h1>Lyra Alarm & Timer</h1>
+            <button id="back-btn" onclick="window.location.href='index.html'">Back</button>
+        </div>
+
+        <!-- Digital Clock -->
+        <div id="digital-clock" class="clock"></div>
+
+        <!-- Set Alarm Section -->
+        <div class="section alarm-section">
+            <h2>Set Alarm</h2>
+            <input type="time" id="alarm-time">
+            <button class="action-btn" onclick="setAlarm()">Set Alarm</button>
+        </div>
+
+        <!-- Timer Section -->
+        <div class="section timer-section">
+            <h2>Timer</h2>
+            <input type="number" id="timer-input" placeholder="Enter seconds">
+            <button class="action-btn" onclick="startTimer()">Start Timer</button>
+        </div>
+
+        <!-- Stopwatch Section -->
+        <div class="section stopwatch-section">
+            <h2>Stopwatch</h2>
+            <button class="action-btn" onclick="startStopwatch()">Start</button>
+            <button class="action-btn" onclick="stopStopwatch()">Stop</button>
+            <button class="action-btn" onclick="resetStopwatch()">Reset</button>
+            <div id="stopwatch-display">00:00</div>
+        </div>
+
+        <!-- Bedtime Section -->
+        <div class="section bedtime-section">
+            <h2>Set Bedtime</h2>
+            <input type="time" id="bedtime-input">
+            <button class="action-btn" onclick="setBedtime()">Set Bedtime</button>
+        </div>
+
+        <!-- Alarm History Section -->
+        <div class="section history-section">
+            <h2>Alarm History</h2>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <script src="alarm.js"></script>
+</body>
+</html>
